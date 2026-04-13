@@ -4,11 +4,13 @@ import {
   Notebook, CheckSquare, Kanban, Users, Mail, Phone, Video, 
   Mic, ChevronDown, ChevronRight, Box, Activity, Umbrella, 
   UserCheck, Receipt, Briefcase, FileCheck, Camera, Download, Clock,
-  UserPlus, History, User, List, Bell, ClipboardList, Settings
+  UserPlus, History, User, List, Bell, ClipboardList, Settings,
+  Network, Orbit, SquarePen, LayoutGrid, PieChart, Shapes, Map
 } from 'lucide-react';
 
 export default function Sidebar({ currentView, onViewChange }: { currentView: string, onViewChange: (view: string) => void }) {
   const [isReportsOpen, setIsReportsOpen] = useState(false);
+  const [isBaseUIOpen, setIsBaseUIOpen] = useState(false);
 
   const reportSubItems = [
     { label: 'Reports', view: 'report-main' },
@@ -27,6 +29,37 @@ export default function Sidebar({ currentView, onViewChange }: { currentView: st
     { label: 'Overtime Limit', view: 'report-overtime-limit' },
     { label: 'Working on Weekends', view: 'report-working-weekends' },
     { label: 'Expense Report', view: 'report-expense' },
+  ];
+
+  const baseUISubItems = [
+    { label: 'Accordion', view: 'ui-accordion' },
+    { label: 'Alerts', view: 'ui-alerts' },
+    { label: 'Avatar', view: 'ui-avatar' },
+    { label: 'Badges', view: 'ui-badges' },
+    { label: 'Breadcrumb', view: 'ui-breadcrumb' },
+    { label: 'Buttons', view: 'ui-buttons' },
+    { label: 'Button Group', view: 'ui-button-group' },
+    { label: 'Card', view: 'ui-card' },
+    { label: 'Carousel', view: 'ui-carousel' },
+    { label: 'Collapse', view: 'ui-collapse' },
+    { label: 'Dropdowns', view: 'ui-dropdowns' },
+    { label: 'Ratio', view: 'ui-ratio' },
+    { label: 'Grid', view: 'ui-grid' },
+    { label: 'Images', view: 'ui-images' },
+    { label: 'Links', view: 'ui-links' },
+    { label: 'List Group', view: 'ui-list-group' },
+    { label: 'Modals', view: 'ui-modals' },
+    { label: 'Offcanvas', view: 'ui-offcanvas' },
+    { label: 'Pagination', view: 'ui-pagination' },
+    { label: 'Placeholders', view: 'ui-placeholders' },
+    { label: 'Progress', view: 'ui-progress' },
+    { label: 'Scrollspy', view: 'ui-scrollspy' },
+    { label: 'Spinner', view: 'ui-spinner' },
+    { label: 'Tabs', view: 'ui-tabs' },
+    { label: 'Toasts', view: 'ui-toasts' },
+    { label: 'Tooltips', view: 'ui-tooltips' },
+    { label: 'Typography', view: 'ui-typography' },
+    { label: 'Utilities', view: 'ui-utilities' },
   ];
 
   return (
@@ -335,6 +368,79 @@ export default function Sidebar({ currentView, onViewChange }: { currentView: st
           >
             <Settings size={18} />
             <span className="text-sm font-medium">Settings</span>
+          </div>
+        </nav>
+
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 mt-8">UI Interface</p>
+        <nav className="space-y-1">
+          <div className="mt-1">
+            <div 
+              onClick={() => setIsBaseUIOpen(!isBaseUIOpen)}
+              className={`flex items-center justify-between p-2 rounded-lg cursor-pointer ${currentView.startsWith('ui-') || isBaseUIOpen ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'}`}
+            >
+              <div className="flex items-center gap-3">
+                <Network size={18} />
+                <span className="text-sm font-medium">Base UI</span>
+              </div>
+              {isBaseUIOpen || currentView.startsWith('ui-') ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+            </div>
+            
+            {(isBaseUIOpen || currentView.startsWith('ui-')) && (
+              <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-100">
+                {baseUISubItems.map((item) => (
+                  <div 
+                    key={item.view}
+                    onClick={() => onViewChange(item.view)}
+                    className={`flex items-center gap-3 p-2 pl-6 cursor-pointer relative ${currentView === item.view ? 'text-blue-600 font-medium' : 'text-gray-500 hover:text-gray-700'}`}
+                  >
+                    {currentView === item.view && <div className="absolute left-[-2px] top-1/2 -translate-y-1/2 w-0.5 h-4 bg-blue-600 rounded-full" />}
+                    <span className={`${currentView === item.view ? 'text-blue-600' : 'text-gray-300'} font-bold mr-1`}>−</span>
+                    <span className={`text-sm ${currentView === item.view ? 'text-blue-600' : ''}`}>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer">
+            <div className="flex items-center gap-3">
+              <Orbit size={18} />
+              <span className="text-sm font-medium">Advanced UI</span>
+            </div>
+            <ChevronRight size={14} />
+          </div>
+          <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer">
+            <div className="flex items-center gap-3">
+              <SquarePen size={18} />
+              <span className="text-sm font-medium">Forms</span>
+            </div>
+            <ChevronRight size={14} />
+          </div>
+          <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer">
+            <div className="flex items-center gap-3">
+              <LayoutGrid size={18} />
+              <span className="text-sm font-medium">Tables</span>
+            </div>
+            <ChevronRight size={14} />
+          </div>
+          <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer">
+            <div className="flex items-center gap-3">
+              <PieChart size={18} />
+              <span className="text-sm font-medium">Charts</span>
+            </div>
+            <ChevronRight size={14} />
+          </div>
+          <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer">
+            <div className="flex items-center gap-3">
+              <Shapes size={18} />
+              <span className="text-sm font-medium">Icons</span>
+            </div>
+            <ChevronRight size={14} />
+          </div>
+          <div className="flex items-center justify-between p-2 text-gray-600 hover:bg-gray-50 rounded-lg cursor-pointer">
+            <div className="flex items-center gap-3">
+              <Map size={18} />
+              <span className="text-sm font-medium">Widgets</span>
+            </div>
           </div>
         </nav>
       </div>

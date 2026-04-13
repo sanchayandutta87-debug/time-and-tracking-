@@ -41,10 +41,28 @@ import AttendanceReportView from './components/AttendanceReportView';
 import ActivitySummaryView from './components/ActivitySummaryView';
 import UnusualActivityView from './components/UnusualActivityView';
 import HoursTrackedView from './components/HoursTrackedView';
+import ProjectsTasksReportView from './components/ProjectsTasksReportView';
+import TimelineReportView from './components/TimelineReportView';
+import ManualTimeReportView from './components/ManualTimeReportView';
+import PoorTimeUseView from './components/PoorTimeUseView';
+import WebAppUsageView from './components/WebAppUsageView';
+import LowActivityView from './components/LowActivityView';
+import IdleTimeReportView from './components/IdleTimeReportView';
+import OvertimeLimitView from './components/OvertimeLimitView';
+import WorkingOnWeekendsView from './components/WorkingOnWeekendsView';
+import ExpenseReportView from './components/ExpenseReportView';
+import SettingsView from './components/SettingsView';
 import ScreenshotsView from './components/ScreenshotsView';
 import EditTimeView from './components/EditTimeView';
 import DownloadView from './components/DownloadView';
-import { Search, Plus, Box, Users, UserCheck, UserPlus, List, Grid, ChevronRight, Menu, Bell, Moon, Globe } from 'lucide-react';
+import AccordionView from './components/AccordionView';
+import AlertsView from './components/AlertsView';
+import AvatarView from './components/AvatarView';
+import BadgesView from './components/BadgesView';
+import BreadcrumbView from './components/BreadcrumbView';
+import ButtonsView from './components/ButtonsView';
+import ButtonGroupView from './components/ButtonGroupView';
+import { Search, Plus, Box, Users, UserCheck, UserPlus, List, Grid, ChevronRight, Menu, Bell, Moon, Globe, Settings as SettingsIcon } from 'lucide-react';
 
 const stats = [
   { title: 'Total Projects', value: '2520', change: '+15.2%', color: '#3b82f6', icon: <Box size={18} />, data: [{value: 10}, {value: 20}, {value: 15}, {value: 30}, {value: 25}, {value: 35}] },
@@ -94,7 +112,7 @@ export default function App() {
             
             <div className="flex items-center gap-4">
               <button className={`p-2 rounded-lg relative ${currentView === 'dark-mode' ? 'hover:bg-gray-800 text-gray-400' : 'hover:bg-gray-50 text-gray-500'}`}>
-                <Globe size={20} />
+                <img src="https://flagcdn.com/w20/us.png" alt="US Flag" className="w-5 h-auto rounded-sm" />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 border-2 border-white rounded-full"></span>
               </button>
               <button className={`p-2 rounded-lg ${currentView === 'dark-mode' ? 'hover:bg-gray-800 text-gray-400' : 'hover:bg-gray-50 text-gray-500'}`}>
@@ -187,7 +205,74 @@ export default function App() {
             <UnusualActivityView />
           ) : currentView === 'report-hours-tracked' ? (
             <HoursTrackedView />
-          ) : currentView === 'user-management' || currentView === 'invoices' || currentView === 'reports' || currentView === 'settings' || currentView.startsWith('report-') ? (
+          ) : currentView === 'report-projects-tasks' ? (
+            <ProjectsTasksReportView />
+          ) : currentView === 'report-timeline' ? (
+            <TimelineReportView />
+          ) : currentView === 'report-manual-time' ? (
+            <ManualTimeReportView />
+          ) : currentView === 'report-poor-time-use' ? (
+            <PoorTimeUseView />
+          ) : currentView === 'report-web-app-usage' ? (
+            <WebAppUsageView />
+          ) : currentView === 'report-low-activity' ? (
+            <LowActivityView />
+          ) : currentView === 'report-idle-time' ? (
+            <IdleTimeReportView />
+          ) : currentView === 'report-overtime-limit' ? (
+            <OvertimeLimitView />
+          ) : currentView === 'report-working-weekends' ? (
+            <WorkingOnWeekendsView />
+          ) : currentView === 'report-expense' ? (
+            <ExpenseReportView />
+          ) : currentView === 'settings' ? (
+            <SettingsView />
+          ) : currentView === 'ui-accordion' ? (
+            <div className="p-8">
+              <AccordionView />
+            </div>
+          ) : currentView === 'ui-alerts' ? (
+            <div className="p-8">
+              <AlertsView />
+            </div>
+          ) : currentView === 'ui-avatar' ? (
+            <div className="p-8">
+              <AvatarView />
+            </div>
+          ) : currentView === 'ui-badges' ? (
+            <div className="p-8">
+              <BadgesView />
+            </div>
+          ) : currentView === 'ui-breadcrumb' ? (
+            <div className="p-8">
+              <BreadcrumbView />
+            </div>
+          ) : currentView === 'ui-buttons' ? (
+            <div className="p-8">
+              <ButtonsView />
+            </div>
+          ) : currentView === 'ui-button-group' ? (
+            <div className="p-8">
+              <ButtonGroupView />
+            </div>
+          ) : currentView.startsWith('ui-') ? (
+            <div className="p-8">
+               <div className="flex justify-between items-center mb-8">
+                <h1 className="text-xl font-bold text-gray-800 capitalize">{currentView.replace('ui-', '').replace('-', ' ')}</h1>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <span>UI Interface</span>
+                  <ChevronRight size={14} />
+                  <span>Base UI</span>
+                  <ChevronRight size={14} />
+                  <span className="text-gray-600 capitalize">{currentView.replace('ui-', '').replace('-', ' ')}</span>
+                </div>
+              </div>
+              <div className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
+                <h2 className="text-lg font-bold text-gray-800 mb-4">{currentView.replace('ui-', '').replace('-', ' ')} Component</h2>
+                <p className="text-gray-500">This component is part of the Base UI interface. Detailed documentation and examples will be available soon.</p>
+              </div>
+            </div>
+          ) : currentView === 'user-management' || currentView === 'invoices' || currentView === 'reports' || currentView.startsWith('report-') ? (
             <div className="p-8">
                <div className="flex justify-between items-center mb-8">
                 <h1 className="text-xl font-bold text-gray-800 capitalize">{currentView.replace('-', ' ')}</h1>
@@ -205,6 +290,11 @@ export default function App() {
             <AdminDashboardView />
           )}
         </main>
+        
+        {/* Floating Settings Button */}
+        <button className="fixed right-0 top-1/2 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-l-lg shadow-lg hover:bg-blue-700 transition-all z-50">
+          <SettingsIcon size={20} className="animate-spin-slow" />
+        </button>
       </div>
     </div>
   );
